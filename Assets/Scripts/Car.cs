@@ -4,13 +4,29 @@ using UnityEngine;
 
 public class Car : MonoBehaviour
 {
-    void Start()
+    [SerializeField] private float speed = 10f;
+    [SerializeField] private float speedGainPerSec = 1f;
+    [SerializeField] private float turnSpeed = 100f;
+
+    private int steerValue;
+    
+    void Update()
     {
+        speed += speedGainPerSec * Time.deltaTime;
+        
+        transform.Rotate(0f,steerValue * turnSpeed * Time.deltaTime,0f);
+        
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);
         
     }
 
-    void Update()
+    public void Steer(int value)
     {
-        
+        steerValue = value;
+
     }
+    
+    
+    
+    
 }
